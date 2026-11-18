@@ -1,0 +1,62 @@
+/* 프로젝트 참여자 목록 */
+.participant-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px 0;
+}
+/* 참여자 이름 태그 */
+.nametag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border: 1px solid var(--color-muted);
+    background: var(--color-background);
+    color: var(--color-text);
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+}
+/* 참여자 삭제 버튼 */
+.nametag button {
+    color: var(--color-text);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 0;
+}
+/* 진행률 바 */
+.progress-bar {
+    width: 100%;
+    height: 9px;
+    background-color: var(--color-border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+.progress-fill {
+    height: 100%;
+    background-color: var(--color-secondary);
+    border-radius: 10px;
+    transition: width 0.3s;
+}
+/* 퍼센트 원 */
+.percent-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.percent-circle span {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: var(--color-background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

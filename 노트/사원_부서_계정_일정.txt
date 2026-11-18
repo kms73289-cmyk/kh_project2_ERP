@@ -1,0 +1,86 @@
+-- 계정
+-- 계정
+CREATE TABLE identities(
+identity_id INT AUTO_INCREMENT PRIMARY KEY,
+identity_name VARCHAR(20) NOT NULL,
+identity_email VARCHAR(20) NOT NULL UNIQUE,
+backup_email VARCHAR(20),
+password VARCHAR(20) NOT NULL
+);
+
+-- 부서
+create table departments(
+	department_id INT AUTO_INCREMENT PRIMARY KEY,
+	department_name VARCHAR(20)
+);
+
+-- 사원
+CREATE TABLE employees (
+    employee_id INT PRIMARY KEY,
+    name VARCHAR(20) NOT NULL,
+    is_admin TINYINT(1) NOT NULL DEFAULT 0,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    phone VARCHAR(20),
+    address VARCHAR(255),
+    department_id INT,
+    position VARCHAR(50),
+    employment_type VARCHAR(20),
+    hire_date DATE,
+    employment_status VARCHAR(20) DEFAULT '재직',
+    resignation_date DATE,
+    FOREIGN KEY (employee_id) REFERENCES identities(identity_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (department_id) REFERENCES departments(department_id) ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+-- 일정관리
+CREATE TABLE schedules (
+    schedule_id INT AUTO_INCREMENT PRIMARY KEY,
+    s_content VARCHAR(255),
+    employee_id INT NOT NULL,
+    s_date DATE NOT NULL,
+    hidden BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY(employee_id) REFERENCES employees(employee_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- 계정
+INSERT INTO  identities ( identity_email,  identity_name, backup_email, password)
+VALUES
+('kim@erp.com', '김민준', 'aa@a', '1aA!'),
+('lee@erp.com', '이서연', 'bb@a', '2aA!'),
+('park@erp.com', '박지훈', 'cc@a', '3aA!'),
+('choi@erp.com', '최유진', 'dd@a', '4aA!'),
+('jung@erp.com', '정현우', 'ee@a', '5aA!'),
+('kang@erp.com', '강수빈', 'ff@a', '6aA!'),
+('yoon@erp.com', '윤도현', 'gg@a', '7aA!'),
+('han@erp.com', '한지민', 'ee@a', '8aA!');
+
+INSERT INTO departments(department_name)
+VALUES
+('개발1팀'),
+('개발2팀'),
+('영업팀'),
+('인사팁');
+
+-- 2. 직원 인사정보 등록
+INSERT INTO employees ( employee_id, name, is_admin, email, phone, address, department_id, position, employment_type, hire_date, employment_status, resignation_date)
+VALUES
+(1, '김민준', 1, 'kim@erp.com', '010-1234-5678', '서울시 강남구', 1, '부장', '정규직', '2020-03-02', '재직', NULL),
+(2, '이서연', 0, 'lee@erp.com', '010-2345-6789', '서울시 송파구', 2, '과장', '정규직', '2021-06-15', '재직', NULL),
+(3, '박지훈', 0, 'park@erp.com', '010-3456-7890', '경기도 성남시', 3, '대리', '정규직', '2022-01-10', '재직', NULL),
+(4, '최유진', 0, 'choi@erp.com', '010-4567-8901', '서울시 마포구', 4, '사원', '정규직', '2023-03-20', '재직', NULL),
+(5, '정현우', 0, 'jung@erp.com', '010-5678-9012', '경기도 수원시', 4, '사원', '계약직', '2024-02-01', '재직', NULL),
+(6, '강수빈', 0, 'kang@erp.com', '010-6789-0123', '인천시 연수구', 3, '대리', '정규직', '2022-09-05', '재직', NULL),
+(7, '윤도현', 0, 'yoon@erp.com', '010-7890-1234', '서울시 관악구', 1, '사원', '인턴', '2025-01-06', '재직', NULL),
+(8, '한지민', 0, 'han@erp.com', '010-8901-2345', '경기도 안양시', 2, '사원', '정규직', '2023-07-17', '퇴사', '2025-12-31');
+
+-- 일정
+INSERT INTO schedules (s_content, employee_id, s_date, hidden)
+VALUES
+('주간 업무 회의', 1, '2026-11-06', FALSE),
+('신규 프로젝트 기획 회의', 2, '2026-11-09', FALSE),
+('고객사 미팅', 3, '2026-11-10', FALSE),
+('개발팀 코드 리뷰', 4, '2026-11-12', FALSE),
+('사내 교육 일정', 5, '2026-11-13', FALSE),
+('프로젝트 중간 점검 회의', 1, '2026-11-16', FALSE),
+('개인 면담', 2, '2026-11-18', TRUE),
+('인사 평가 면담', 3, '2026-11-20', TRUE);

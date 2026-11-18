@@ -1,0 +1,206 @@
+﻿데이터베이스 테이블 명세서
+기준: 첨부 SQL CREATE TABLE (최신본)
+표기: PK=기본키 / FK=외래키 / 복합 PK=복합 기본키
+=======================================================================
+
+1. 계정 및 인사 관리
+=======================================================================
+
+[identities] 계정 - 수정
+컬럼설명    | 컬럼명            | 데이터타입       | 제약조건
+---------------------------------------------------------------------------------------------------------
+계정 고유번호 | identity_id    | INT         | PK, AUTO_INCREMENT
+사용자 이름  | identity_name  | VARCHAR(20) | NOT NULL
+로그인 이메일 | identity_email | VARCHAR(20) | NOT NULL, UNIQUE
+비밀번호    | password       | VARCHAR(20) | NOT NULL
+
+[employees] 사원
+컬럼설명   | 컬럼명               | 데이터타입        | 제약조건
+---------------------------------------------------------------------------------------------------------
+사원번호   | employee_id       | INT          | PK, FK → identity(identity_id), ON DELETE CASCADE, ON UPDATE CASCADE
+사원 이름  | name              | VARCHAR(20)  | NOT NULL
+관리자 여부 | is_admin          | TINYINT(1)   | NOT NULL, DEFAULT 0
+사원 이메일 | email             | VARCHAR(100) | NOT NULL, UNIQUE
+연락처    | phone             | VARCHAR(20)  | -
+주소     | address           | VARCHAR(255) | -
+부서번호   | department_id     | INT          | -
+직급     | position          | VARCHAR(50)  | -
+고용 형태  | employment_type   | VARCHAR(20)  | -
+입사일    | hire_date         | DATE         | -
+재직 상태  | employment_status | VARCHAR(20)  | DEFAULT '재직'
+퇴사일    | resignation_date  | DATE         | -
+
+[schedules] 일정
+컬럼설명    | 컬럼명         | 데이터타입        | 제약조건
+---------------------------------------------------------------------------------------------------------
+일정 고유번호 | schedule_id | INT          | PK, AUTO_INCREMENT
+일정 내용   | s_content   | VARCHAR(255) | -
+사원번호    | employee_id | INT          | NOT NULL, FK → employees(employee_id), ON DELETE CASCADE, ON UPDATE CASCADE
+일정 날짜   | s_date      | DATE         | NOT NULL
+비공개 여부  | hidden      | BOOLEAN      | DEFAULT FALSE
+
+2. 프로젝트 및 업무 관리
+=======================================================================
+
+[projects] 프로젝트
+컬럼설명      | 컬럼명                | 데이터타입        | 제약조건
+---------------------------------------------------------------------------------------------------------
+프로젝트 고유번호 | project_id         | INT          | PK, AUTO_INCREMENT
+프로젝트 이름   | project_name       | VARCHAR(100) | NOT NULL
+프로젝트 관리자  | project_manager    | INT          | FK → employees(employee_id), ON DELETE SET NULL, ON UPDATE CASCADE
+프로젝트 시작일  | project_start_date | DATE         | NOT NULL
+프로젝트 종료일  | project_end_date   | DATE         | NOT NULL
+프로젝트 진행률  | project_progress   | INT          | DEFAULT 0
+프로젝트 상태   | project_status     | VARCHAR(20)  | NOT NULL
+
+[tasks] 업무
+컬럼설명      | 컬럼명           | 데이터타입       | 제약조건
+---------------------------------------------------------------------------------------------------------
+업무 고유번호   | task_id       | INT         | PK, AUTO_INCREMENT
+업무 이름     | task_name     | VARCHAR(50) | NOT NULL
+업무 우선순위   | task_priority | VARCHAR(20) | -
+업무 담당자    | task_manager  | INT         | FK → employees(employee_id), ON DELETE CASCADE, ON UPDATE CASCADE
+업무 시작일    | task_start    | DATE        | -
+업무 종료일    | task_end      | DATE        | -
+업무 진행률    | task_progress | INT         | -
+소속 프로젝트번호 | project_id    | INT         | FK → projects(project_id), ON DELETE CASCADE, ON UPDATE CASCADE
+
+[project_members] 프로젝트 참여자
+컬럼설명    | 컬럼명         | 데이터타입 | 제약조건
+---------------------------------------------------------------------------------------------------------
+프로젝트번호  | project_id  | INT   | 복합 PK, NOT NULL, FK → projects(project_id), ON DELETE CASCADE, ON UPDATE CASCADE
+참여 사원번호 | employee_id | INT   | 복합 PK, NOT NULL, FK → employees(employee_id), ON DELETE CASCADE, ON UPDATE CASCADE
+
+[task_checklists] 업무 체크리스트
+컬럼설명       | 컬럼명            | 데이터타입       | 제약조건
+---------------------------------------------------------------------------------------------------------
+체크리스트 고유번호 | list_number    | INT         | PK, AUTO_INCREMENT
+체크리스트 항목명  | checklist_name | VARCHAR(50) | NOT NULL
+완료 여부      | complete       | BOOLEAN     | NOT NULL, DEFAULT FALSE
+소속 업무번호    | task_id        | INT         | NOT NULL, FK → tasks(task_id), ON DELETE CASCADE, ON UPDATE CASCADE
+
+3. 커뮤니티 관리
+=======================================================================
+
+[posts] 게시글
+컬럼설명     | 컬럼명          | 데이터타입        | 제약조건
+---------------------------------------------------------------------------------------------------------
+게시글 고유번호 | post_id      | INT          | PK, AUTO_INCREMENT, NOT NULL
+작성자 사원번호 | employee_id  | INT          | NOT NULL, FK → employees(employee_id), ON DELETE CASCADE, ON UPDATE CASCADE
+게시글 제목   | post_title   | VARCHAR(255) | NOT NULL
+게시글 내용   | post_content | TEXT         | NOT NULL
+작성일시     | created_at   | DATETIME     | NOT NULL, DEFAULT CURRENT_TIMESTAMP
+게시판 유형   | board_type   | VARCHAR(20)  | NOT NULL
+게시글 유형   | post_type    | VARCHAR(20)  | NOT NULL, DEFAULT '일반'
+비밀글 여부   | is_secret    | TINYINT(1)   | NOT NULL, DEFAULT 0
+
+[comments] 댓글
+컬럼설명     | 컬럼명             | 데이터타입    | 제약조건
+---------------------------------------------------------------------------------------------------------
+댓글 고유번호  | comment_id      | INT      | PK, AUTO_INCREMENT, NOT NULL
+게시글번호    | post_id         | INT      | NOT NULL, FK → posts(post_id), ON DELETE CASCADE, ON UPDATE CASCADE
+작성자 사원번호 | employee_id     | INT      | NOT NULL, FK → employees(employee_id), ON DELETE CASCADE, ON UPDATE CASCADE
+댓글 내용    | comment_content | TEXT     | NOT NULL
+작성일시     | created_at      | DATETIME | NOT NULL, DEFAULT CURRENT_TIMESTAMP
+
+4. 이커머스 관리
+=======================================================================
+[customers] 고객
+컬럼설명    | 컬럼명            | 데이터타입       | 제약조건
+---------------------------------------------------------------------------------------------------------
+고객 고유번호 | customer_id    | INT         | PK, AUTO_INCREMENT
+고객 이름   | customer_name  | VARCHAR(20) | NOT NULL
+고객 연락처  | customer_phone | VARCHAR(20) | NOT NULL
+
+[products] 상품
+컬럼설명      | 컬럼명                       | 데이터타입        | 제약조건
+---------------------------------------------------------------------------------------------------------
+상품 고유번호   | product_id                | INT          | PK, AUTO_INCREMENT
+상품 카테고리   | category                  | VARCHAR(20)  | -
+상품명       | product_name              | VARCHAR(50)  | NOT NULL
+상품 설명     | product_description       | TEXT         | -
+상품 대표 이미지 | product_image             | VARCHAR(255) | -
+상품 가격     | product_price             | INT          | -
+상품 상세 이미지 | product_description_image | VARCHAR(255) | -
+
+[orders] 주문
+컬럼설명    | 컬럼명          | 데이터타입       | 제약조건
+---------------------------------------------------------------------------------------------------------
+주문 고유번호 | order_id     | INT         | PK, AUTO_INCREMENT
+고객번호    | customer_id  | INT         | FK → customers(customer_id), ON DELETE CASCADE, ON UPDATE CASCADE
+상품번호    | product_id   | INT         | FK → products(product_id), ON DELETE CASCADE, ON UPDATE CASCADE
+주문 금액   | order_amount | INT         | NOT NULL
+주문 상태   | order_status | VARCHAR(20) | NOT NULL, DEFAULT '결제대기'
+주문일시    | order_date   | DATETIME    | NOT NULL, DEFAULT CURRENT_TIMESTAMP
+
+[reviews] 리뷰 — 수정
+컬럼설명		컬럼명	데이터타입		제약조건
+리뷰 고유번호	review_id	INT			PK, AUTO_INCREMENT
+주문번호		order_id	INT			NOT NULL, FK → orders(order_id), ON DELETE CASCADE, ON UPDATE CASCADE
+평점			rating	TINYINT			NOT NULL, CHECK (1~5)
+추천 여부		recommend	BOOLEAN		NOT NULL
+리뷰 내용		comment	TEXT
+리뷰 이미지		review_imageVARCHAR(255)	DEFAULT NULL
+리뷰 작성일시	created_at	DATETIME		DEFAULT CURRENT_TIMESTAMP
+관리자 답변		admin_reply	TEXT			DEFAULT NULL
+답변 작성일시	replied_at	DATETIME		DEFAULT NULL
+
+[store_layout] 판매 사이트 레이아웃 — 추가
+컬럼설명	컬럼명	데이터타입	제약조건
+레이아웃 고유번호	layout_id	INT	PK, AUTO_INCREMENT
+영역 구분	l_category	VARCHAR(30)	NOT NULL
+세부 항목 구분	l_sub	VARCHAR(20)	-
+이미지 경로	image_path	VARCHAR(255)	-
+표시 문구	content_text	TEXT	-
+항목 표시 여부	show_item	BOOLEAN	NOT NULL, DEFAULT TRUE
+
+5. 고객관계 관리 (CRM)
+=======================================================================
+[inquiries] 고객 문의
+컬럼설명       | 컬럼명                | 데이터타입       | 제약조건
+---------------------------------------------------------------------------------------------------------
+문의 고유번호    | inquiry_id         	| INT             | PK, AUTO_INCREMENT
+고객번호          | customer_id        	| INT             | NOT NULL, FK → customers(customer_id), ON DELETE CASCADE, ON UPDATE CASCADE
+상담 담당 사원번호 | employee_id      | INT              | FK → employees(employee_id), ON DELETE SET NULL, ON UPDATE CASCADE, NULL 허용
+문의 제목         | inquiry_title      	| VARCHAR(50) | NOT NULL
+문의 상세 내용   | inquiry_details   	| TEXT            | NOT NULL
+상담 처리 내용   | consultation_notes  | TEXT            | NULL 허용
+문의 처리 상태   | inquiry_status        | VARCHAR(20) | NOT NULL
+문의 접수일시    | received_at           | DATETIME      | NOT NULL, DEFAULT CURRENT_TIMESTAMP
+문의 접수 경로   | source_channel      | VARCHAR(20) | NOT NULL
+
+[project_requests] 프로젝트 요청
+컬럼설명         | 컬럼명                    | 데이터타입       | 제약조건
+---------------------------------------------------------------------------------------------------------
+프로젝트 요청 고유번호 | project_request_id     | INT         | PK, AUTO_INCREMENT
+요청 고객번호      | customer_id            | INT         | NOT NULL, FK → customers(customer_id), ON DELETE CASCADE, ON UPDATE CASCADE
+프로젝트 요청 제목   | request_title          | VARCHAR(50) | NOT NULL
+프로젝트 요구사항    | requirements           | TEXT        | NOT NULL
+희망 완료일       | desired_due_date       | DATE        | NULL 허용
+요청 처리 상태     | project_request_status | VARCHAR(20) | NOT NULL, DEFAULT '대기'
+요청 접수일시      | requested_at           | DATETIME    | NOT NULL, DEFAULT CURRENT_TIMESTAMP
+
+=======================================================================
+6.재무관리 — 추가
+[budgets] 월별 예산
+컬럼설명       | 컬럼명          | 데이터타입    | 제약조건
+---------------------------------------------------------------------------------------------------------
+예산 고유번호   | budget_id      | INT          | PK, AUTO_INCREMENT
+예산 항목명     | budget_name    | VARCHAR(100) | NOT NULL
+예산 편성액     | budget_amount  | BIGINT       | NOT NULL
+예산 적용 월    | budget_month   | DATE         | NOT NULL
+
+[financial_transactions] 재무 거래내역
+컬럼설명         | 컬럼명             | 데이터타입    | 제약조건
+---------------------------------------------------------------------------------------------------------
+거래 고유번호     | transaction_id     | INT          | PK, AUTO_INCREMENT
+거래 제목        | transaction_title  | VARCHAR(150) | NOT NULL
+거래 유형        | transaction_type   | VARCHAR(10)  | NOT NULL, INCOME 또는 EXPENSE
+거래 금액        | amount             | BIGINT       | NOT NULL
+거래 발생일      | transaction_date   | DATE         | NOT NULL
+거래 메모        | memo               | TEXT         | NULL 허용
+연결 예산번호     | budget_id          | INT          | FK → budgets(budget_id), NULL 허용
+연결 프로젝트번호  | project_id         | INT          | FK → projects(project_id), NULL 허용
+거래 등록 사원번호 | created_by         | INT          | NOT NULL, FK → employees(employee_id)
+
+=======================================================================

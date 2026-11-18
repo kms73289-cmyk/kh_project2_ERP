@@ -1,0 +1,114 @@
+/* 수정 영역 */
+.left-edit {
+    padding: 20px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+}
+
+.left-edit > form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* 각 수정 항목 */
+.left-edit > form > div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* 체크박스가 포함된 항목은 가로 정렬 */
+.left-edit > form > div:has(input[type="checkbox"]) {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+}
+
+/* 항목명 */
+.left-edit label {
+    color: var(--color-text);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* 텍스트 및 파일 입력 */
+.left-edit input[type="text"],
+.left-edit input[type="file"] {
+    width: 100%;
+    min-height: 38px;
+    padding: 8px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    box-sizing: border-box;
+}
+
+/* 체크박스 항목의 입력창 */
+.left-edit > form > div:has(input[type="checkbox"]) > input[type="text"] {
+    flex: 1;
+    width: auto;
+    min-width: 0;
+}
+
+/* 입력창 포커스 */
+.left-edit input[type="text"]:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px var(--color-primary-soft);
+}
+
+/* 파일 선택 버튼 */
+.left-edit input[type="file"]::file-selector-button {
+    padding: 8px 14px;
+    margin-right: 12px;
+    border: none;
+    border-radius: 5px;
+    background: var(--color-primary-soft);
+    color: var(--color-primary-hover);
+    cursor: pointer;
+}
+
+/* 체크박스 */
+.left-edit label:has(input[type="checkbox"]) {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+.left-edit input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+}
+
+/* 이미지 미리보기 */
+.left-edit .inputform img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+}
+
+/* 저장 버튼 */
+.left-edit > form > button {
+    align-self: flex-end;
+    padding: 10px 24px;
+    border: 1px solid var(--color-primary);
+    border-radius: 6px;
+    background: var(--color-primary);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.left-edit > form > button:hover {
+    background: var(--color-primary-hover);
+}

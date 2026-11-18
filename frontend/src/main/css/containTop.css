@@ -1,0 +1,198 @@
+/* 상단 박스 컨테이너 */
+.box-container {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+}
+
+/* 상단 박스 length */
+.box-length {
+    flex-direction: row;
+    justify-content: center;
+    min-width: 80px;
+    padding: 28px 24px;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-background);
+    color: var(--color-text);
+    border-radius: 12px;
+    flex: 1;
+}
+
+.box-length span {
+    color: var(--color-muted);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+/* 본문 바로 위 */
+.container-top {
+    display: flex;
+    align-items: center;
+    padding: 20px 50px;
+    width: 100%;
+    box-sizing: border-box;
+}
+/* 버튼 그룹 */
+.top-button {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 공통 버튼 */
+.top-button > button {
+    padding: 9px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* 상단 검색 영역 */
+.top-button > label, .top-searchinput {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+}
+
+/* 검색 라벨 */
+.top-searchinput > label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text);
+    white-space: nowrap;
+}
+
+/* 검색 입력창 */
+.top-searchinput > input, .top-searchinput > select {
+    width: 400px;
+    height: 38px;
+    padding: 8px 12px;
+
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* 입력창 포커스 */
+.top-searchinput > input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px var(--color-primary-soft);
+}
+
+/* 검색 버튼 */
+.top-searchinput > button {
+    height: 38px;
+    padding: 0 16px;
+
+    border: 1px solid var(--color-primary);
+    border-radius: 6px;
+    background: var(--color-primary);
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.top-searchinput > button:hover {
+    background: var(--color-primary-hover);
+}
+
+/* 연도 / 월 선택 영역 */
+.select-date {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-left: 12px;
+
+    color: var(--color-text);
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* 연도 / 월 선택창 */
+.select-date > select {
+    min-width: 120px;
+    height: 38px;
+    padding: 0 12px;
+
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 14px;
+    cursor: pointer;
+}
+.select-date > input {
+    min-width: 120px;
+    height: 38px;
+    padding: 0 12px;
+
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* 이전 / 다음 버튼 */
+.select-date > button {
+    width: 36px;
+    height: 36px;
+
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* 마우스 반응 */
+.select-date > button:hover,
+.select-date > select:hover {
+    border-color: var(--color-primary);
+    background: var(--color-primary-soft);
+}
+
+/* 키보드 포커스 */
+.select-date > button:focus-visible,
+.select-date > select:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* 주간 선택창 */
+.select-date > input[type="week"] {
+    height: 34px;
+    padding: 0 30px;
+
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.select-date > input[type="week"]:hover {
+    border-color: var(--color-primary);
+}
+
+.select-date > input[type="week"]:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px var(--color-primary-soft);
+}

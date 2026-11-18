@@ -1,0 +1,64 @@
+월별예산_거래내역
+-- 1. 월별 예산: 한 행은 '특정 월의 예산 항목 하나'
+CREATE TABLE budgets (
+    budget_id      INT AUTO_INCREMENT PRIMARY KEY,
+    budget_name    VARCHAR(100) NOT NULL,  -- 예: 급여, 월세, 출장비, 기타
+    budget_amount  BIGINT NOT NULL,        -- 편성액 (원)
+    budget_month   DATE NOT NULL           -- 예: 2026년 11월 → '2026-11-01'
+);
+
+-- 2. 거래내역: 한 행은 '실제 입금 또는 지출 한 건'
+CREATE TABLE financial_transactions (
+    transaction_id     INT AUTO_INCREMENT PRIMARY KEY,
+    transaction_title  VARCHAR(150) NOT NULL,
+    transaction_type   VARCHAR(10) NOT NULL,  -- INCOME 또는 EXPENSE
+    amount             BIGINT NOT NULL,
+    transaction_date   DATE NOT NULL,
+    memo               TEXT, 
+    budget_id          INT NULL,
+    project_id         INT NULL,
+    created_by         INT NOT NULL,
+    FOREIGN KEY (budget_id)  REFERENCES budgets(budget_id),
+    FOREIGN KEY (project_id) REFERENCES projects(project_id),
+    FOREIGN KEY (created_by) REFERENCES employees(employee_id)
+);
+-- 예산
+INSERT INTO budgets (budget_name, budget_amount, budget_month)
+VALUES
+('급여', 5000000, '2026-11-01'),
+('월세', 1000000, '2026-11-01'),
+('서비스 구독료', 1000000, '2026-11-01'),
+('출장비', 1000000, '2026-11-01');
+
+-- 수입
+INSERT INTO financial_transactions
+(transaction_title, transaction_type, amount, transaction_date,
+ memo, budget_id, project_id, created_by)
+VALUES
+('홈페이지 제작 대금', 'INCOME', 5000000, '2026-11-03',
+ '제작비 전액 선입금', NULL, 1, 1),
+
+('브랜드몰 제작 대금', 'INCOME', 3000000, '2026-11-12',
+ '제작비 전액 선입금', NULL, 2, 1),
+
+('랜딩페이지 제작 대금', 'INCOME', 2000000, '2026-11-18',
+ '제작비 전액 선입금', NULL, 3, 1);
+-- 지출
+INSERT INTO financial_transactions
+(transaction_title, transaction_type, amount, transaction_date,
+ memo, budget_id, project_id, created_by)
+VALUES
+('11월 사무실 월세', 'EXPENSE', 1000000, '2026-11-05',
+ '사무실 임차료 지급', 2, NULL, 1),
+
+('업무 도구 구독료', 'EXPENSE', 600000, '2026-11-10',
+ '디자인 및 협업 도구 월 이용료', 3, NULL, 1),
+
+('고객사 방문 교통비', 'EXPENSE', 150000, '2026-11-17',
+ '고객 미팅 왕복 교통비', 4, 1, 1),
+
+('현장 출장 숙박비', 'EXPENSE', 250000, '2026-11-20',
+ '프로젝트 현장 방문 숙박비', 4, 2, 1),
+
+('11월 직원 급여', 'EXPENSE', 4000000, '2026-11-25',
+ '11월 직원 급여 합계 지급', 1, NULL, 1);

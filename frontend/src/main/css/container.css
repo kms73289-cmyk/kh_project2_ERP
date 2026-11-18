@@ -1,0 +1,244 @@
+
+/* 본문 */
+.container {
+    display: flex;
+    gap: 20px;
+}
+
+/* 본문 테이블 */
+.container table {
+    width: 95%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+.container th{
+    padding: 12px 15px;
+    color: var(--color-border);
+    background-color: var(--color-muted);
+    border: 1px solid var(--color-border);
+}
+.container td {
+    padding: 12px 15px;
+    text-align: center;
+    color: var(--color-text);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+}
+
+.center {
+    width: 60%;
+    align-items: flex-start;
+    max-height: 600px;
+    overflow-y: auto;
+}
+.center::-webkit-scrollbar {
+    display: none; /* Chrome, Edge, Safari */
+}
+
+.right {
+    width: 38%;
+    padding: 20px;
+    border: 1px solid var(--color-border);
+    background: var(--color-background);
+    border-radius: 12px;
+    box-sizing: border-box;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.right::-webkit-scrollbar {
+    display: none; /* Chrome, Edge, Safari */
+}
+
+.right p, .right h3{color: var(--color-text);}
+
+/* 중앙 목록 영역 */
+.center {
+    width: 60%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+}
+
+/* 상위 프로젝트 카드 */
+.center-listout {
+    padding: 20px;
+    margin-bottom: 16px;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+}
+
+/* 개별 프로젝트 / 업무 카드 */
+.center-list {
+    padding: 18px 20px;
+    margin-bottom: 10px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+/* 중첩된 업무 카드 */
+.center-listout .center-list {
+    margin-top: 12px;
+    margin-bottom: 0;
+}
+
+/* 제목 공통 */
+.center-listout h3,
+.center-list h3 {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin: 0 0 16px;
+
+    color: var(--color-text);
+    font-size: 17px;
+    font-weight: 600;
+}
+
+/* 데이터 행 공통 */
+.center-listout p,
+.center-list p {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin: 10px 0;
+
+    color: var(--color-text);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+/* 항목명 너비 통일 */
+.center-listout h3 > span,
+.center-listout p > span,
+.center-list h3 > span,
+.center-list p > span {
+    flex: 0 0 140px;
+    color: var(--color-muted);
+    font-weight: 500;
+}
+
+/* 제목 버튼 */
+.center-list h3 {
+    border-bottom: 1px solid var(--color-border);
+}
+/* 마우스 반응 */
+.center-list:hover {
+    cursor: pointer;
+    transform: translateY(-3px);
+    border-color: var(--color-primary-mid);
+    box-shadow: 0 4px 12px var(--color-border);
+}
+
+/* 상세정보 영역 */
+.right-detailInfo {
+    padding: 24px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+}
+
+/* 상세정보 제목 */
+.right-detailInfo h3 {
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text);
+    font-size: 20px;
+    font-weight: 700;
+}
+.right-detailInfo i{
+    font-size: 16px;
+    font-weight: 400;
+    margin-left: 40px;
+}
+.right-detailInfo button{
+    float: right;
+}
+/* 데이터 한 줄 */
+.right-detailInfo p{
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin: 12px 0;
+    color: var(--color-text);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* 데이터 항목명 */
+.right-detailInfo p > span{
+    display: inline-block;
+    flex: 0 0 100px;
+    color: var(--color-muted);
+    font-weight: 600;
+}
+
+/* 상세 하위 목록 */
+.right-detaillist {
+    margin: 6px 0;
+    padding: 12px 20px;
+    background: var(--color-surface-soft);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+}
+
+/* 목록 제목 */
+.right-detaillist > h3 {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin: 0 0 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-border);
+
+    color: var(--color-text);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* 데이터 행 */
+.right-detaillist > p {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin: 4px 0;
+
+    color: var(--color-text);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* 항목명 너비 통일 */
+.right-detaillist > h3 > span,
+.right-detaillist > p > span {
+    flex: 0 0 100px;
+    color: var(--color-muted);
+    font-weight: 600;
+}
+
+.review-comment {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+}
+
+.right-detailInfo .review-comment > p {
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    align-self: stretch;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.right-detailInfo .review-comment > p > span {
+    flex: 0 0 100px;
+}

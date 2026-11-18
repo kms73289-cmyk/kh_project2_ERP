@@ -1,0 +1,43 @@
+.chart-outter {
+    overflow-y: auto;
+    max-height: 340px;
+}
+.chart-outter::-webkit-scrollbar {
+    display: none;
+}
+
+.chart-box {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    max-width: 95%;
+}
+
+.chart-year {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    min-height: 45px;
+}
+
+.chart-week {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    min-height: 45px;
+}
+
+.chart-bar {
+    grid-row: 1;
+    align-self: center;
+    text-align: center;
+    color: white;
+    border-radius: 4px;
+    height: 30px;
+}
+
+.chart-bar span {
+    font-size: 14px;
+    /* 글자 크기 */
+    font-style: italic;
+    /* 글자 기울기 */
+    font-weight: 200;
+    /* 글자 굵기 */
+}

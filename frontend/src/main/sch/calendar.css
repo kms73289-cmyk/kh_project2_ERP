@@ -1,0 +1,120 @@
+.calendar {
+    width: 95%;
+    min-width: 0;
+}
+
+.calendar table {
+    margin: 12px 0;
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 2px solid var(--color-border);
+    background: var(--color-surface-soft);
+}
+
+.calendar th {
+    width: 14.285%;
+    padding: 8px;
+    box-sizing: border-box;
+    height: 35px;
+}
+
+.calendar tbody tr {
+    height: 120px;
+    vertical-align: top;
+}
+
+.full {
+    display: block;
+    width: 100%;
+    height: 14px;
+    border: none;
+    margin-bottom: 4px;
+    box-sizing: border-box;
+}
+.tdsun {
+    background-color: var(--color-danger-soft);
+    color: var(--color-danger);
+}
+.tdsat {
+    background-color: var(--color-primary-soft);
+    color: var(--color-primary);
+}
+.thnone {
+    background-color: var(--color-muted);
+    color: var(--color-border);
+}
+.thsun {
+    background-color: var(--color-danger);
+    color: var(--color-danger-soft);
+}
+.thsat {
+    background-color: var(--color-primary);
+    color: var(--color-primary-soft);
+}
+.calendar td {
+    cursor: pointer;
+}
+
+/* 스케줄Management 공간 분할*/
+.sch-container {
+    display: flex;
+}
+.sch-left {
+    width: 68%;
+    align-items: flex-start;
+}
+.sch-right {
+    width: 30%;
+    padding: 20px;
+}
+.sch-list {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    background-color: var(--color-surface-soft);
+}
+.sch-list > p {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin: 10px 0;
+    color: var(--color-text);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.sch-list > p > span {
+    flex: 0 0 40px;
+    color: var(--color-muted);
+    font-weight: bold;
+}
+/* 달력 카테고리별 색상 */
+.inline-p {
+    display: inline;
+    margin-right: 20px;
+}
+/* 내 일정 공간 분할 */
+.mytop-container {
+    width: 100%;
+    margin-bottom: 30px;
+}
+/* 하단: 달력 + 일간 일정 */
+.mybot-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    width: 100%;
+}
+/* 달력 */
+.my-calender {
+    min-width: 0;
+}
+.my-calender tbody tr{
+    height: 90px;
+}
+/* 일간 일정 */
+.my-today {
+    min-width: 0;
+
+}

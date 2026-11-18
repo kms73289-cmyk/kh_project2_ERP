@@ -1,0 +1,63 @@
+@charset "utf-8";
+:root {
+    --color-background: #F4F7FA;
+    --color-surface-soft: #F9FBFD;
+    --color-surface: #FFFFFF;
+
+    --color-primary: #4682B4;
+    --color-primary-hover: #356A94;
+    --color-primary-mid: #97B9D5;
+    --color-primary-soft: #E7F1F7;
+    --color-secondary: #008B8B;
+
+    --color-text: #263747;
+    --color-muted: #64748b;
+    --color-border: #DCE5EC;
+
+    --color-danger: #B96570;
+    --color-danger-soft: #F9ECEE;
+}
+
+/* ERP 테마: 라이트 팔레트는 기존 :root 값을 그대로 사용합니다. */
+:root { color-scheme: light; }
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --color-background: #111923;
+    --color-surface-soft: #172330;
+    --color-surface: #1d2c3b;
+    --color-primary: #78acd4;
+    --color-primary-hover: #a3cbed;
+    --color-primary-mid: #2a4258;
+    --color-primary-soft: #233b50;
+    --color-secondary: #59c5c0;
+    --color-text: #e4edf5;
+    --color-muted: #a5b5c5;
+    --color-border: #3b5064;
+    --color-danger: #eb9aa5;
+    --color-danger-soft: #422c37;
+}
+/* 모드 전환 시에만 색상 속성을 애니메이션 처리합니다. */
+:root.erp-theme-changing body,
+:root.erp-theme-changing body * {
+    transition-property: background-color, color, border-color, box-shadow, fill, stroke !important;
+    transition-duration: 0.7s !important;
+    transition-timing-function: ease !important;
+    transition-delay: 0s !important;
+}
+
+*{margin: 0; padding: 0;}
+a,
+a:link,
+a:visited {
+    color: inherit;
+    text-decoration: none;
+}
+li{list-style: none;}
+table{border-collapse: collapse;}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {-webkit-appearance: none;}
+
+@media (prefers-reduced-motion: reduce) {
+    :root.erp-theme-changing body,
+    :root.erp-theme-changing body * { transition-duration: 0s !important; }
+}

@@ -1,0 +1,47 @@
+CREATE TABLE store_layout (
+    layout_id INT AUTO_INCREMENT PRIMARY KEY,
+    l_category VARCHAR(30) NOT NULL,
+    l_sub VARCHAR(20),
+    image_path VARCHAR(255),
+    content_text TEXT,
+    show_item BOOLEAN NOT NULL DEFAULT TRUE
+);
+
+INSERT INTO store_layout (l_category, l_sub, image_path, content_text)
+VALUES
+-- 상단
+('header', 'img', 'preview/logo.png', '홈피'),
+('header', 'arr', NULL, '상품'),
+('header', 'arr', NULL, '리뷰'),
+('header', 'arr', NULL, '문의'),
+
+-- 배너
+('banner', 'img', 'preview/wedsbd.png', '배너이미지'),
+('banner', 'title', NULL, '비즈니스를 성장시키는 맞춤형 홈페이지 구축'),
+('banner', 'point', NULL, '당신에게 맞는 홈페이지를 선택하세요'),
+('banner', 'sub', NULL, '기획/디자인/개발/운영까지 한 번에, 당신의 온라인 비즈니스를 만듭니다.'),
+
+-- 상품 카테고리
+('category', 'arr', 'preview/icon.png', '홍보형'),
+('category', 'arr', 'preview/icon.png', '소개형'),
+('category', 'arr', 'preview/icon.png', '쇼핑몰형'),
+('category', 'arr', 'preview/icon.png', '포트폴리오형'),
+-- 상품
+('product', 'img', 'preview/webn.png', '상품 타이틀 배경'),
+('product', 'title', NULL, '추천 패키지'),
+('product', 'sub', NULL, '다양한 상품들이 준비되어있습니다'),
+-- 리뷰
+('review', 'img', 'preview/webn.png', '리뷰 타이틀 배경'),
+('review', 'title', NULL, '홈픽을 이용한 고객들의 후기'),
+('review', 'sub', NULL, '솔직한 후기를 만나보세요'),
+-- 문의
+('inquiry', 'img', 'preview/webn.png', '문의 타이틀 배경'),
+('inquiry', 'title', NULL, '지금 바로 상담받으세요'),
+('inquiry', 'arr', 'preview/icon_1.png', '문의/상담 하기'),
+('inquiry', 'arr', 'preview/icon_2.png', '유지보수'),
+('inquiry', 'arr', 'preview/icon_3.png', '호스팅/도메인'),
+('inquiry', 'sub', NULL, '커스텀 제작 문의도 가능'),
+
+-- 하단
+('footer', 'arr', NULL, '2026 All rights reserved.'),
+('footer', 'arr', NULL, '0000-0000');

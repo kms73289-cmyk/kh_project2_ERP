@@ -1,0 +1,112 @@
+/* 체크리스트 전체 */
+.list-in {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+/* 체크리스트 한 줄 */
+.list-in > .list {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 10px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-surface-soft);
+}
+
+/* 체크리스트 내용 */
+.list-in > .list > span {
+    flex: 1;
+    color: var(--color-text);
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+/* 체크박스 */
+.list-in > .list > input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+}
+
+/* 삭제 버튼 */
+.list-in > .list > button {
+    padding: 4px 9px;
+    border: 1px solid var(--color-danger);
+    border-radius: 5px;
+    background: var(--color-danger-soft);
+    color: var(--color-danger);
+    cursor: pointer;
+}
+
+/* 할 일 추가 영역 */
+.list-add {
+    margin: 16px 0;
+    padding: 16px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-surface);
+}
+
+.list-add > form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.list-add label {
+    color: var(--color-text);
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* 할 일 입력창 */
+.list-add input[type="text"] {
+    flex: 1;
+    min-width: 0;
+    height: 38px;
+    padding: 0 12px;
+
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    box-sizing: border-box;
+}
+
+.list-add input[type="text"]:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px var(--color-primary-soft);
+}
+
+/* 저장 버튼 */
+.list-add button {
+    height: 38px;
+    padding: 0 16px;
+    border: 1px solid var(--color-primary);
+    border-radius: 6px;
+    background: var(--color-primary);
+    color: white;
+    cursor: pointer;
+}
+
+.list-add button:hover {
+    background: var(--color-primary-hover);
+}
+
+.list-add > h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.list-add > h3 > button {
+    margin-left: auto;
+}

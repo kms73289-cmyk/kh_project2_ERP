@@ -1,0 +1,213 @@
+-- 고객 문의 테이블
+CREATE TABLE inquiries (
+    inquiry_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT NOT NULL,
+    employee_id INT NULL,
+    inquiry_title VARCHAR(50) NOT NULL,
+    inquiry_details TEXT NOT NULL,
+    consultation_notes TEXT NULL,
+    inquiry_status VARCHAR(20) NOT NULL,
+    received_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    source_channel VARCHAR(20) NOT NULL,
+
+    CONSTRAINT fk_inquiries_customer
+        FOREIGN KEY (customer_id)
+        REFERENCES customers(customer_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+
+    CONSTRAINT fk_inquiries_employee
+        FOREIGN KEY (employee_id)
+        REFERENCES employees(employee_id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE
+);
+
+-- 프로젝트 요청 테이블
+CREATE TABLE project_requests (
+    project_request_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT NOT NULL,
+    request_title VARCHAR(50) NOT NULL,
+    requirements TEXT NOT NULL,
+    desired_due_date DATE NULL,
+    project_request_status VARCHAR(20) NOT NULL DEFAULT '대기',
+    requested_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_project_requests_customer
+        FOREIGN KEY (customer_id)
+        REFERENCES customers(customer_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+-- 고객 문의 데이터
+INSERT INTO inquiries ( customer_id, employee_id, inquiry_title, inquiry_details, consultation_notes, inquiry_status, received_at, source_channel)
+VALUES
+(
+    1, 1,
+    '기업 홈페이지 리뉴얼 문의',
+    '기존 기업 홈페이지를 모바일에서도 편하게 이용하도록 개편하고 싶습니다.',
+    '회사 소개, 사업 안내, 고객 문의 페이지 제작 범위를 확정했습니다.',
+    '완료', '2026-08-20 10:00:00', '방문상담'
+),
+(
+    1, 1,
+    '여행 예약 홈페이지 제작 문의',
+    '여행 상품 검색과 온라인 예약이 가능한 홈페이지도 제작하고 싶습니다.',
+    '여행 상품 검색, 예약 및 결제 기능을 제작 범위로 확정했습니다.',
+    '보관', '2026-09-10 14:00:00', '방문상담'
+),
+(
+    2, 2,
+    '쇼핑몰 제작 문의',
+    '상품 판매용 쇼핑몰 제작 기간과 비용을 알고 싶습니다.',
+    '상품 목록, 장바구니, 주문 및 결제 기능을 제작하기로 했습니다.',
+    '완료', '2026-09-05 11:00:00', '이커머스'
+),
+(
+    3, 3,
+    '병원 예약 시스템 문의',
+    '환자가 진료 날짜와 시간을 선택할 수 있는 예약 시스템이 필요합니다.',
+    '진료 예약, 예약 조회 및 관리자 예약 관리 기능을 확정했습니다.',
+    '완료', '2026-07-20 10:30:00', '방문상담'
+),
+(
+    3, 3,
+    '사내 ERP 대시보드 문의',
+    '사내 업무 현황과 통계를 조회하는 대시보드가 필요합니다.',
+    '통계 차트와 사용자 권한 관리 기능을 제작하기로 했습니다.',
+    '완료', '2026-10-05 15:00:00', '전화'
+),
+(
+    4, 4,
+    '카페 홈페이지 문의',
+    '카페 메뉴와 매장 위치를 소개하는 홈페이지가 필요합니다.',
+    '브랜드 소개, 메뉴 안내, 매장 위치 페이지 제작을 확정했습니다.',
+    '완료', '2026-09-20 13:00:00', '방문상담'
+),
+(
+    5, 5,
+    '교육 플랫폼 문의',
+    '온라인 강의와 수강생을 관리하는 사이트가 필요합니다.',
+    '강의 관리, 수강 신청 및 수강생 대시보드 기능을 확정했습니다.',
+    '완료', '2026-10-01 11:00:00', '이커머스'
+),
+(
+    6, 6,
+    '부동산 매물 사이트 문의',
+    '매물을 등록하고 지역과 가격으로 검색하는 사이트가 필요합니다.',
+    '매물 등록, 수정, 삭제 및 조건별 검색 기능을 확정했습니다.',
+    '완료', '2026-10-20 14:00:00', '방문상담'
+),
+(
+    7, 7,
+    '음식점 주문 웹앱 문의',
+    '고객이 메뉴를 선택해 주문할 수 있는 웹앱이 필요합니다.',
+    '메뉴 관리, 주문 접수 및 주문 상태 관리 기능을 확정했습니다.',
+    '보관', '2026-06-20 10:00:00', '전화'
+),
+(
+    8, 8,
+    '포트폴리오 홈페이지 문의',
+    '작업물을 소개하는 개인 포트폴리오 홈페이지를 제작하고 싶습니다.',
+    '작업물 목록, 상세 페이지 및 애니메이션 적용 범위를 확정했습니다.',
+    '완료', '2026-09-25 16:00:00', '이커머스'
+),
+(
+    2, 2,
+    '쇼핑몰 배송 조회 기능 추가 문의',
+    '주문 후 배송 상태를 확인하는 기능도 추가하고 싶습니다.',
+    NULL,
+    '대기', '2026-10-26 14:30:00', '이커머스'
+),
+(
+    8, NULL,
+    '유지보수 비용 문의',
+    '홈페이지 완성 후 유지보수 비용이 궁금합니다.',
+    NULL,
+    '미정', '2026-10-27 09:00:00', '이커머스'
+);
+
+-- 프로젝트 요청 데이터
+INSERT INTO project_requests ( customer_id, request_title, requirements, desired_due_date, project_request_status, requested_at)
+VALUES
+(
+    1,
+    '기업 홈페이지 리뉴얼 요청',
+    '회사 소개, 사업 안내, 고객 문의 페이지 및 반응형 화면을 제작합니다.',
+    '2026-11-30',
+    '진행',
+    '2026-08-25 10:00:00'
+),
+(
+    2,
+    '쇼핑몰 웹사이트 제작 요청',
+    '상품 목록, 상품 상세, 장바구니, 주문 및 결제 기능을 구현합니다.',
+    '2026-12-15',
+    '진행',
+    '2026-09-10 11:00:00'
+),
+(
+    3,
+    '병원 예약 시스템 제작 요청',
+    '진료 예약, 예약 조회 및 관리자 예약 관리 기능을 구현합니다.',
+    '2026-10-15',
+    '진행',
+    '2026-07-25 10:00:00'
+),
+(
+    4,
+    '카페 브랜드 홈페이지 제작 요청',
+    '브랜드 소개, 메뉴 안내, 매장 위치 및 반응형 화면을 제작합니다.',
+    '2026-11-15',
+    '진행',
+    '2026-09-25 13:00:00'
+),
+(
+    5,
+    '교육 플랫폼 개발 요청',
+    '강의 관리, 수강 신청 및 수강생 대시보드 기능을 구현합니다.',
+    '2027-01-31',
+    '진행',
+    '2026-10-05 11:00:00'
+),
+(
+    6,
+    '부동산 매물 관리 사이트 제작 요청',
+    '매물 등록, 수정, 삭제 및 지역과 가격에 따른 검색 기능을 구현합니다.',
+    '2027-02-28',
+    '대기',
+    '2026-10-23 14:00:00'
+),
+(
+    7,
+    '음식점 주문 웹앱 제작 요청',
+    '메뉴 관리, 주문 접수 및 주문 상태 관리 기능을 구현합니다.',
+    '2026-09-30',
+    '완료',
+    '2026-06-25 10:00:00'
+),
+(
+    8,
+    '포트폴리오 웹사이트 제작 요청',
+    '작업물 목록과 상세 페이지를 제작하고 애니메이션을 적용합니다.',
+    '2026-11-05',
+    '대기',
+    '2026-09-28 16:00:00'
+),
+(
+    1,
+    '여행 예약 홈페이지 제작 요청',
+    '여행 상품 검색, 예약 및 결제 기능을 구현합니다.',
+    '2026-12-20',
+    '대기',
+    '2026-09-15 14:00:00'
+),
+(
+    3,
+    '사내 ERP 대시보드 제작 요청',
+    '업무 현황 통계 차트와 사용자 권한 관리 기능을 구현합니다.',
+    '2026-12-31',
+    '대기',
+    '2026-10-10 15:00:00'
+);

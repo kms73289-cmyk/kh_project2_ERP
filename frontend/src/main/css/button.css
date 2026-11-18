@@ -1,0 +1,60 @@
+/* 버튼 형태 제거 */
+.none-button {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    /* 마우스 올리면 손가락 */
+}
+.onClickTable:hover {
+    cursor: pointer;
+}
+/* 여러버튼 중 선택된 버튼 */
+.selected {
+    background-color: var(--color-primary-mid);
+    border: 1px solid var(--color-primary);
+}
+/* 선택되지 않은 버튼 */
+.unselected {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+}
+/* 마우스 반응 */
+.top-button > button:hover {
+    border-color: var(--color-primary);
+}
+/* 수정 / 삭제 버튼 영역 */
+.edit-delete {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin:6px 0;
+}
+/* 공통 버튼 */
+.edit-delete > button, .edit-button, .delete-button {
+    padding: 9px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+/* 수정 버튼 */
+.edit-button {
+    background: var(--color-primary-soft);
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary-hover);
+}
+/* 삭제 버튼 */
+.delete-button {
+    background: var(--color-danger-soft);
+    border: 1px solid var(--color-danger);
+    color: var(--color-danger);
+}
+/* 마우스 반응 */
+.edit-button:hover, .delete-button:hover{
+    filter: brightness(0.96);
+}
+
+
